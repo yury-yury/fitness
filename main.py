@@ -5,18 +5,16 @@ name_training = input()
 
 training = read_training(name_training)
 # print(training)
-for i in range(len(training)):
-    [exes, rep, attem, weth] = training[i]
-    for at in range(attem):
-        print('Exercise ', exes)
+for i in training:
+    for at in range(i.attempts):
+        print('Exercise ', i.name)
         print('Attempt ', at + 1)
-        print('Предыдущий вес ', weth)
+        print('Предыдущий вес ', i.wedth)
         print('Введите вес или ничего при прежнем весе')
         weth_1 = input()
         if weth_1 != '':
-            weth = weth_1
-            training[i][3] = weth
-        print('выполните', rep, 'повторений')
+            i.wedth = weth_1
+        print('выполните', i.rep, 'повторений')
         input()
 print('Тренировка закончена')
 write_training(name_training, training)
