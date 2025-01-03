@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class Exercise(BaseModel):
     name: str
     rep: str
-    attempts: int
+    attempts: int = Field(le=10)
     wedth: str
