@@ -18,7 +18,3 @@ for i in training:
         input()
 print('Тренировка закончена')
 write_training(name_training, training)
-"""
-except:
-    print('Ошибка при открытии файла')
-"""

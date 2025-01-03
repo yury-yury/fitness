@@ -11,7 +11,10 @@ def read_training(name: str) -> list[Exercise]:
                 ex, rep, attempts, wedth = line.split(',')
                 attempts = int(attempts)
                 wedth = wedth.strip()
-                result.append(Exercise(ex, rep, attempts, wedth))
+                result.append(Exercise(name=ex,
+                                       rep=rep,
+                                       attempts=attempts,
+                                       wedth=wedth))
 
     return result
 

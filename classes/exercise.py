@@ -1,6 +1,8 @@
-class Exercise:
-    def __init__(self, name, rep, attempts, wedth):
-        self.name = name
-        self.rep = rep
-        self.attempts = attempts
-        self.wedth = wedth
+from pydantic import BaseModel
+
+
+class Exercise(BaseModel):
+    name: str
+    rep: str
+    attempts: int
+    wedth: str
