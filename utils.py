@@ -5,7 +5,7 @@ def read_training(name: str) -> list[list[Any]]:
     with open(f'{name}.txt', 'r', encoding='utf-8') as file:
         result = []
         for line in file:
-            ex, rep, attempts, wedth = line.split(',')
+            ex, rep, attempts, wedth = line.split(', ')
             attempts = int(attempts)
             result.append([ex, rep, attempts, wedth])
 
