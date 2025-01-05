@@ -1,8 +1,12 @@
 import time
-from utils import read_training, write_training, write_dairy
+from multiprocessing import Process
+
+from utils import read_training, write_training, write_dairy, beep
 
 print("Input name of training")
 name_training = input()
+print("Введите желаемое время отдыха между подходами")
+zz_time = int(input())
 
 training = read_training(name_training)
 write_dairy(
@@ -22,6 +26,9 @@ for i in training:
             i.wedth = weth_1
         print("выполните", i.rep, "повторений")
         input()
+        p = Process(target=beep, args=(zz_time,))
+        p.start()
+
         write_dairy(
             f"{time.asctime(time.localtime(time.time()))} Выполнен {at+1} подход к упражнению {i.name}, {i.rep} повторов с весом {i.wedth} кг\n"
         )

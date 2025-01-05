@@ -1,3 +1,8 @@
+import asyncio
+import time
+
+from playsound import playsound
+
 from classes.exercise import Exercise
 
 
@@ -33,5 +38,11 @@ def write_dairy(data: str) -> None:
         file.write(data)
 
 
+def beep(t):
+    time.sleep(t)
+    playsound('storage/vyistrel-pistoleta-36125.mp3')
+
+
+
 if __name__ == "__main__":
-    print(read_training(1))
+    beep(30)
