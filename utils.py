@@ -1,4 +1,3 @@
-import asyncio
 import time
 
 from playsound import playsound
@@ -12,10 +11,10 @@ def read_training(name: str) -> list[Exercise]:
         result: list = []
         for line in file:
             if line != "\n":
-                ex, rep, attempts, wedth = line.split(",")
+                ex, rep, attempts, weight = line.split(",")
                 result.append(
                     Exercise(
-                        name=ex, rep=rep, attempts=int(attempts), wedth=wedth.strip()
+                        name=ex, rep=rep, attempts=int(attempts), weight=weight.strip()
                     )
                 )
 
@@ -27,21 +26,29 @@ def write_training(name: str, data: list[Exercise]) -> None:
         result = str()
         for item in data:
             w_data = ", ".join(
-                [item.name, item.rep.strip(), str(item.attempts), item.wedth]
+                [item.name, item.rep.strip(), str(item.attempts), item.weight]
             )
             result += w_data + "\n"
         file.write(result)
 
 
 def write_dairy(data: str) -> None:
+    """
+    The write_dairy function takes as a positional argument the text of an entry in the training diary,
+    in the form of a string. When called, it opens the training diary file, adds an entry to the file,
+    and closes the file.
+    """
     with open("storage/training_dairy.txt", "a", encoding="utf-8") as file:
         file.write(data)
 
 
-def beep(t):
+def beep(t: int) -> None:
+    """
+    The beep function takes as a positional argument the value of the rest time between sets in seconds,
+    as an integer. When a call is made after the end of the rest period, an audio signal is played.
+    """
     time.sleep(t)
     playsound('storage/vyistrel-pistoleta-36125.mp3')
-
 
 
 if __name__ == "__main__":

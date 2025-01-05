@@ -5,4 +5,4 @@ class Exercise(BaseModel):
     name: str
     rep: str
     attempts: int = Field(le=10)
-    wedth: str
+    weight: str
