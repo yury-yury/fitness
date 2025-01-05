@@ -13,9 +13,12 @@ for i in training:
         print("Упражнение ", i.name)
         print(f"Подход {at + 1} из {i.attempts}")
         print("Предыдущий вес ", i.wedth)
-        print("Введите вес или ничего при прежнем весе")
+        print("Введите вес или ничего при прежнем весе,")
+        print("для пропуска подхода введите - " )
         weth_1 = input()
-        if weth_1 != "":
+        if weth_1 == "-":
+            continue
+        elif weth_1 != "":
             i.wedth = weth_1
         print("выполните", i.rep, "повторений")
         input()
@@ -24,6 +27,6 @@ for i in training:
         )
 print("Тренировка закончена")
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Finished training {name_training}\n"
+    f"{time.asctime(time.localtime(time.time()))} Finished training {name_training}\n\n"
 )
 write_training(name_training, training)
