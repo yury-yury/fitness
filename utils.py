@@ -1,5 +1,4 @@
 import time
-
 from playsound import playsound
 
 from classes.exercise import Exercise
@@ -48,7 +47,7 @@ def beep(t: int) -> None:
     as an integer. When a call is made after the end of the rest period, an audio signal is played.
     """
     time.sleep(t)
-    playsound('storage/vyistrel-pistoleta-36125.mp3')
+    playsound('static/vyistrel-pistoleta-36125.mp3')
 
 
 if __name__ == "__main__":
