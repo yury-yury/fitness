@@ -27,6 +27,7 @@ for i in training:
             i.weight = weight_1
         print("выполните", i.rep, "повторений")
         input()
+
         p = Process(target=beep, args=(zz_time,))
         p.start()
 
