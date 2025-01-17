@@ -2,6 +2,7 @@ import time
 from playsound import playsound
 
 from classes.exercise import Exercise
+# import training.models
 
 
 def read_training(name: str) -> list[Exercise]:
@@ -18,6 +19,12 @@ def read_training(name: str) -> list[Exercise]:
                 )
 
     return result
+
+
+# def load_training(name: str) -> list[training.models.Exercise]:
+#     train = training.models.Training.objects.filter(name=name).first()
+#     result = training.models.Repetition.objects.filter(training=train).all()
+#     return result
 
 
 def write_training(name: str, data: list[Exercise]) -> None:
@@ -51,4 +58,4 @@ def beep(t: int) -> None:
 
 
 if __name__ == "__main__":
-    beep(30)
+    print(load_training('тест'))

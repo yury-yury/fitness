@@ -8,10 +8,7 @@ name_training = input()
 print("Введите желаемое время отдыха между подходами")
 zz_time = int(input())
 
-p = None
-start_time = time.time()
-
-training = read_training(name_training)
+training = load_training(name_training)
 write_dairy(
     f"{time.asctime(time.localtime(time.time()))} Start training {name_training}\n"
 )
@@ -28,23 +25,17 @@ for i in training:
             continue
         elif weight_1 != "":
             i.weight = weight_1
-        if p is not None:
-            p.join()
         print("выполните", i.rep, "повторений")
         input()
 
-        if not (at + 1 == i.attempts and i is training[-1]):
-            p = Process(target=beep, args=(zz_time,))
-            p.start()
+        p = Process(target=beep, args=(zz_time,))
+        p.start()
 
         write_dairy(
             f"{time.asctime(time.localtime(time.time()))} Выполнен {at+1} подход к упражнению {i.name}, {i.rep} повторов с весом {i.weight} кг\n"
         )
-d_time = int(time.time() - start_time)
-report = f'Общее время тренировки составило {d_time // 3600}:{d_time % 3600 // 60}:{d_time % 60}'
 print("Тренировка закончена")
-print(report)
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Finished training {name_training}. {report}\n\n"
+    f"{time.asctime(time.localtime(time.time()))} Finished training {name_training}\n\n"
 )
 write_training(name_training, training)

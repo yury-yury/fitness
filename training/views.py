@@ -1,5 +1,10 @@
 from django.shortcuts import render
 
-def index(request, name_training):
-    print(name_training)
+from training.models import Training
+
+
+def index(request, id_training):
+    print(id_training)
+    my_training = Training.objects.get(pk=id_training)
+    print(my_training)
     return render(request, 'training/my_training.html')

@@ -6,5 +6,5 @@ from training.views import index
 app_name = 'training'
 
 urlpatterns = [
-    path("<str:name_training>", index),
+    path("<int:id_training>", index),
     ]
