@@ -41,7 +41,13 @@ for i in training:
             f"{time.asctime(time.localtime(time.time()))} Выполнен {at+1} подход к упражнению {i.name}, {i.rep} повторов с весом {i.weight} кг\n"
         )
 d_time = int(time.time() - start_time)
-report = f'Общее время тренировки составило {d_time // 3600}:{d_time % 3600 // 60}:{d_time % 60}'
+minute = d_time % 3600 // 60
+minute = minute if minute > 10 else f'0{minute}'
+
+second = d_time % 60
+second = second if second > 10 else f'0{second}'
+
+report = f'Время тренировки {d_time // 3600}:{minute}:{second}'
 print("Тренировка закончена")
 print(report)
 write_dairy(

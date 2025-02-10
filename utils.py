@@ -14,17 +14,10 @@ def read_training(name: str) -> list[Exercise]:
                 ex, rep, attempts, weight = line.split(",")
                 result.append(
                     Exercise(
-                        name=ex, rep=rep, attempts=int(attempts), weight=weight.strip()
+                        name=ex, rep=int(rep), attempts=int(attempts), weight=float(weight.strip())
                     )
                 )
-
     return result
-
-
-# def load_training(name: str) -> list[training.models.Exercise]:
-#     train = training.models.Training.objects.filter(name=name).first()
-#     result = training.models.Repetition.objects.filter(training=train).all()
-#     return result
 
 
 def write_training(name: str, data: list[Exercise]) -> None:
@@ -32,7 +25,7 @@ def write_training(name: str, data: list[Exercise]) -> None:
         result = str()
         for item in data:
             w_data = ", ".join(
-                [item.name, item.rep.strip(), str(item.attempts), item.weight]
+                [item.name, str(item.rep).strip(), str(item.attempts), str(item.weight)]
             )
             result += w_data + "\n"
         file.write(result)

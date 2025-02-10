@@ -1,16 +1,29 @@
 import time
 from multiprocessing import Process
 
-from utils import read_training, write_training, write_dairy, beep
+from utils import write_dairy, beep
+from utils_db import get_all_trainings, read_training, write_training
 
-print("Input name of training")
-name_training = input()
-print("Введите желаемое время отдыха между подходами")
-zz_time = int(input())
+all_training = get_all_trainings()
+print('ВВедите id тренировки')
+for item in all_training:
+    print(item.id, item.name)
+print()
+training_id = int(input())
 
-training = load_training(name_training)
+for item in all_training:
+    if item.id == training_id:
+        zz_time = item.time_to_breathe
+        training_name = item.name
+        break
+
+training = read_training(training_id)
+
+p = None
+start_time = time.time()
+
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Start training {name_training}\n"
+    f"{time.asctime(time.localtime(time.time()))} Start training {training_name}\n"
 )
 for i in training:
     for at in range(i.attempts):
@@ -25,17 +38,29 @@ for i in training:
             continue
         elif weight_1 != "":
             i.weight = weight_1
+        if p is not None:
+            p.join()
         print("выполните", i.rep, "повторений")
         input()
 
-        p = Process(target=beep, args=(zz_time,))
-        p.start()
+        if not (at + 1 == i.attempts and i is training[-1]):
+            p = Process(target=beep, args=(zz_time,))
+            p.start()
 
         write_dairy(
             f"{time.asctime(time.localtime(time.time()))} Выполнен {at+1} подход к упражнению {i.name}, {i.rep} повторов с весом {i.weight} кг\n"
         )
+d_time = int(time.time() - start_time)
+minute = d_time % 3600 // 60
+minute = minute if minute > 10 else f'0{minute}'
+
+second = d_time % 60
+second = second if second > 10 else f'0{second}'
+
+report = f'Время тренировки {d_time // 3600}:{minute}:{second}'
 print("Тренировка закончена")
+print(report)
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Finished training {name_training}\n\n"
+    f"{time.asctime(time.localtime(time.time()))} Finished training {training_name}. {report}\n\n"
 )
-write_training(name_training, training)
+write_training(training_id, training)
