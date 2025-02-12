@@ -21,6 +21,7 @@ def read_training(training_id: int) -> list[ex.Exercise]:
         exer = session.get(Exercise, item.exercise_id)
 
         result.append(ex.Exercise(
+            id=item.id,
             name=exer.name,
             rep=item.repetition,
             attempts=item.set,

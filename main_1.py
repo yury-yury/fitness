@@ -5,7 +5,7 @@ from utils import write_dairy, beep
 from utils_db import get_all_trainings, read_training, write_training
 
 all_training = get_all_trainings()
-print('ВВедите id тренировки')
+print('Введите id тренировки')
 for item in all_training:
     print(item.id, item.name)
 print()
@@ -23,7 +23,7 @@ p = None
 start_time = time.time()
 
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Start training {training_name}\n"
+    f"{time.asctime(time.localtime(time.time()))} Старт тренировки {training_name}\n"
 )
 for i in training:
     for at in range(i.attempts):
@@ -61,6 +61,6 @@ report = f'Время тренировки {d_time // 3600}:{minute}:{second}'
 print("Тренировка закончена")
 print(report)
 write_dairy(
-    f"{time.asctime(time.localtime(time.time()))} Finished training {training_name}. {report}\n\n"
+    f"{time.asctime(time.localtime(time.time()))} Закончена тренировка {training_name}. {report}\n\n"
 )
 write_training(training_id, training)

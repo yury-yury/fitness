@@ -4,7 +4,7 @@ from training.models import TargetMuscle, Exercise, Training, Repetition
 
 
 class TrainingAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('id', 'name', )
 
 
 class RepetitionAdmin(admin.ModelAdmin):

@@ -66,26 +66,26 @@ class Repetition(Base):
     weight = Column(Float)
 
 
-session = next(get_session())
-
-result = list()
-
-tren = session.query(Training).filter(Training.name == 'Ноги').first()
-
-reps = session.query(Repetition).filter(Repetition.training_id == tren.id).order_by(Repetition.number).all()
-
-for item in reps:
-
-    exer = session.get(Exercise, item.exercise_id)
-
-    result.append(ex.Exercise(
-        name = exer.name,
-        rep=item.repetition,
-        attempts=item.set,
-        weight=item.weight
-    ))
-
-for j in result:
-    print(j.name, j.attempts, j.rep, j.weight)
-
+# session = next(get_session())
+#
+# result = list()
+#
+# tren = session.query(Training).filter(Training.name == 'Ноги').first()
+#
+# reps = session.query(Repetition).filter(Repetition.training_id == tren.id).order_by(Repetition.number).all()
+#
+# for item in reps:
+#
+#     exer = session.get(Exercise, item.exercise_id)
+#
+#     result.append(ex.Exercise(
+#         name = exer.name,
+#         rep=item.repetition,
+#         attempts=item.set,
+#         weight=item.weight
+#     ))
+#
+# for j in result:
+#     print(j.name, j.attempts, j.rep, j.weight)
+#
 
